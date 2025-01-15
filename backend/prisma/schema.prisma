@@ -10,5 +10,57 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL")  // Utilisation de la variable d'environnement DATABASE_URL
+}
+
+// Modèle Utilisateur
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+  comments  Comment[]
+}
+
+// Modèle Post (Article de blog)
+model Post {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    Int
+  author      User     @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  categories  Category[] @relation("PostCategory")
+  tags        Tag[]      @relation("PostTag")
+}
+
+// Modèle Comment (Commentaire sur un article)
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  postId    Int
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+// Modèle Category (Catégorie pour organiser les articles)
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  posts Post[] @relation("PostCategory")
+}
+
+// Modèle Tag (Tag pour étiqueter les articles)
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  posts Post[] @relation("PostTag")
 }
