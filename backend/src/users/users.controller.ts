@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { UserService } from './user.service';
+import { UsersService } from './users.service';
 
-@Controller('users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller("users")
+export class UsersController {
+  constructor(private readonly userService: UsersService) {}
 
   // Créer un utilisateur
   @Post()
@@ -13,8 +13,8 @@ export class UserController {
 
   // Récupérer un utilisateur par ID
   @Get(':id')
-  async getUserById(@Param('id') id: number) {
-    return this.userService.findById(id);
+  async getUserById(@Param('id') id: string) {
+    return this.userService.findById(Number(id));
   }
 
   // Récupérer tous les utilisateurs

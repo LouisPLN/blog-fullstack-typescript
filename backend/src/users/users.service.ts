@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service'; // Assurez-vous que PrismaService est configuré correctement 
+import { PrismaService } from '../../prisma/prisma.service'; 
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   // Créer un utilisateur
@@ -10,7 +10,7 @@ export class UserService {
     return await this.prisma.user.create({
       data: {
         email: data.email,
-        password: data.password, // Dans un vrai projet, n'oubliez pas de hasher le mot de passe !
+        password: data.password, // Penser à hacher le mdp
       },
     });
   }
