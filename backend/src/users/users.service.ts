@@ -8,11 +8,10 @@ export class UsersService {
 
   // Créer un utilisateur
   async create(data: { email: string; password: string }) {
-    const hashedPassword = await bcrypt.hash(data.password, 10);
     return await this.prisma.user.create({
       data: {
         email: data.email,
-        password: hashedPassword,
+        password: data.password,
       },
     });
   }

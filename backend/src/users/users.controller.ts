@@ -6,11 +6,18 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile() {
+    return { message: 'Access granted to protected route' };
+  }
   constructor(private readonly userService: UsersService) {}
 
   // Créer un utilisateur
