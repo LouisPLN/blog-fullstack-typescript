@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333'; // URL de ton backend
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3333';
 
 // Fonction pour se connecter
 export const loginUser = async (email: string, password: string) => {
@@ -9,9 +9,12 @@ export const loginUser = async (email: string, password: string) => {
       email,
       password,
     });
-    return response.data; // Contient le token et les infos de l'utilisateur
-  } catch (error) {
-    console.error("Error during login:", error);
-    throw error; // On renvoie l'erreur pour l'afficher
+    return response.data;
+  } catch (error: any) {
+    if (error.response && error.response.status === 401) {
+      throw new Error('Identifiants incorrects, veuillez réessayer.');
+    } else {
+      throw new Error('Une erreur est survenue, veuillez réessayer.');
+    }
   }
 };
