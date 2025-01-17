@@ -28,7 +28,6 @@ export default function LoginForm() {
       if (result.token) {
         saveToken(result.token);
       }
-      router.push("/");
       setIsModalOpen(false);
     } catch (error: any) {
       let message = "Une erreur est survenue, veuillez réessayer.";
