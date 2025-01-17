@@ -3,5 +3,24 @@
 @tailwind utilities;
 
 html {
-  font-family: 'Satoshi', cursive;
+  font-family: "Satoshi", cursive;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  height: 0.6em;
+  width: 0.6em;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #202020;
+  border-radius: 10px;
+}
+
+::selection {
+  background-color: rgba(124, 58, 237, 0.5);
 }

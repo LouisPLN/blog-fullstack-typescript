@@ -53,9 +53,9 @@ export default function LoginForm() {
     <div className="max-w-sm mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <FormInput
-          label="Email"
+          label="Email*"
           type="email"
-          placeholder="Votre email*"
+          placeholder="Votre email"
           register={register}
           name="email"
         />

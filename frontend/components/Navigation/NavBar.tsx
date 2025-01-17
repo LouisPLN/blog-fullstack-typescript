@@ -16,19 +16,19 @@ const Navbar: React.FC = () => {
     <nav className="mx-auto h-full max-w-7xl flex items-center justify-between gap-3">
       <div className="lg:flex-1 flex items-center gap-1.5">
         <Link href="/" className="text-2xl font-bold">
-          Louis <span className="text-green-600">Poulin</span>
+          Louis <span className="text-violet-600">Poulin</span>
         </Link>
       </div>
       <div className="flex items-center justify-end lg:flex-1 gap-4">
         <Link
           href="/"
-          className="text-sm font-medium hidden lg:inline-block relative"
+          className="text-sm font-medium hidden sm:inline-block relative"
         >
           Accueil
         </Link>
         <Link
           href="/blog"
-          className="text-sm font-medium hidden lg:inline-block relative"
+          className="text-sm font-medium hidden sm:inline-block relative"
         >
           Blog
         </Link>
@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
           <>
             <Link
               href="/dashboard"
-              className="text-sm font-medium hidden lg:inline-block relative"
+              className="text-sm font-medium hidden sm:inline-block relative"
             >
               Tableau de Bord
             </Link>

@@ -29,11 +29,11 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      className="fixed z-60 inset-0 flex items-center justify-center bg-black bg-opacity-75"
       onClick={handleOverlayClick}
     >
       <div
-        className={`p-6 rounded-md w-1/3 relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 ${customClass}`}
+        className={`p-6 rounded-md w-auto relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 ${customClass}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button

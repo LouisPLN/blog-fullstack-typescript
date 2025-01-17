@@ -12,7 +12,7 @@ interface FormInputProps<T extends FieldValues> {
 const baseClasses = {
   label: "block font-medium text-gray-700 dark:text-gray-200 mb-1",
   input:
-    "relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-green-600 dark:focus:ring-green-700",
+    "relative block w-full disabled:cursor-not-allowed disabled:opacity-75 focus:outline-none border-0 form-input rounded-md placeholder-gray-400 dark:placeholder-gray-500 text-sm px-2.5 py-1.5 shadow-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 focus:ring-2 focus:ring-violet-600 dark:focus:ring-violet-700",
   errorInput: "border-red-500",
   errorText: "text-red-500 text-sm mt-2",
 };
