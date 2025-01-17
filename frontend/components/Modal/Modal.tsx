@@ -29,16 +29,16 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
       onClick={handleOverlayClick}
     >
       <div
-        className={`bg-white p-6 rounded-md w-1/3 relative ${customClass}`}
+        className={`p-6 rounded-md w-1/3 relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-500 ${customClass}`}
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={closeModal}
-          className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl"
+          className="absolute top-0 right-2 hover:text-pink-600 dark:hover:text-pink-700 text-2xl"
         >
           &times;
         </button>

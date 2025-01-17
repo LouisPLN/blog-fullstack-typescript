@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../utils/api";
-import FormInput from "./FormInput";
-import Modal from "../Modal";
+import FormInput from "../Input/FormInput";
+import Modal from "../Modal/Modal";
 import { saveToken } from "@/utils/auth";
 import router from "next/router";
+import AppButton from "../Button/AppButton";
 
 type LoginFormInputs = {
   email: string;
@@ -43,14 +44,13 @@ export default function LoginForm() {
 
   return (
     <div className="max-w-sm mx-auto">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <FormInput
           label="Email"
           type="email"
           placeholder="Votre email"
           register={register}
           name="email"
-          errors={errors.email}
         />
         <FormInput
           label="Mot de passe"
@@ -58,23 +58,21 @@ export default function LoginForm() {
           placeholder="Votre mot de passe"
           register={register}
           name="password"
-          errors={errors.password}
         />
-        <button
+        <AppButton
           type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className="w-full"
         >
           Se connecter
-        </button>
+        </AppButton>
       </form>
 
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
         title="Erreur de connexion"
-        customClass="bg-red-100"
       >
-        <p className="text-center text-red-500">{errorMessage}</p>
+        <p className="text-center text-pink-600 dark:text-pink-700">{errorMessage}</p>
       </Modal>
     </div>
   );

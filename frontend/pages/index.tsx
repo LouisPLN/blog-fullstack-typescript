@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const index = () => {
   return (
-    <div>index</div>
+    <div className='text-2xl font-bold'>index</div>
   )
 }
 
