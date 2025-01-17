@@ -1,12 +1,10 @@
-import ToggleThemeButton from "../Button/ToggleThemeButton"
 import Navbar from "@/components/Navigation/NavBar"
 
 
 const Header = () => {
   return (
-    <header>
+    <header className="bg-background/75 backdrop-blur border-b h-16 border-gray-200 dark:border-gray-800 sticky top-0 z-50">
       <Navbar />
-        <ToggleThemeButton />
     </header>
   )
 }

@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         <button
           onClick={closeModal}
-          className="absolute top-0 right-2 hover:text-pink-600 dark:hover:text-pink-700 text-2xl"
+          className="absolute h-6 w-6 flex items-center justify-center top-2 right-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-2xl"
         >
           &times;
         </button>

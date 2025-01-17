@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
-  // Vérifie si l'utilisateur est connecté au chargement
+  // Vérifie si le token existe au montage
   useEffect(() => {
     const token = getToken();
     if (token) {
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     removeToken();
     setIsAuthenticated(false);
-    router.push("/login"); 
+    router.push("/login");
   };
 
   return (

@@ -1,4 +1,3 @@
-import ProtectedRoute from '@/components/ProtectedRoute'
 import withAuth from "@/utils/withAuth";
 
 const dashboard = () => {

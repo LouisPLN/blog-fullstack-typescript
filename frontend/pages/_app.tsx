@@ -14,7 +14,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <NextUIProvider className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200">
+    <NextUIProvider className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
       <AuthProvider>
         <Header />
         <Component {...pageProps} />
