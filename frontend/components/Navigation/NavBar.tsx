@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
         {isAuthenticated ? (
           <>
             <Link
-              href="/dashboard"
+              href="/profile/dashboard"
               className="text-sm font-medium hidden sm:inline-block relative"
             >
               Tableau de Bord

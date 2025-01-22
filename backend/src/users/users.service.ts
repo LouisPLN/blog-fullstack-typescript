@@ -6,7 +6,6 @@ import * as bcrypt from 'bcryptjs';
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  // Créer un utilisateur
   async create(data: { email: string; password: string }) {
     return await this.prisma.user.create({
       data: {
@@ -16,7 +15,6 @@ export class UsersService {
     });
   }
 
-  // Supprimer un utilisateur
   async deleteUser(id: number) {
     const user = await this.prisma.user.findUnique({
       where: { id },
@@ -29,7 +27,6 @@ export class UsersService {
     });
   }
 
-  // Mettre à jour un utilisateur
   async updateUser(id: number, data: { email?: string; password?: string }) {
     const user = await this.prisma.user.findUnique({
       where: { id },
@@ -52,21 +49,18 @@ export class UsersService {
     });
   }
 
-  // Trouver un utilisateur par son ID
   async findById(id: number) {
     return await this.prisma.user.findUnique({
       where: { id },
     });
   }
 
-  // Trouver un utilisateur par son email
   async findByEmail(email: string) {
     return await this.prisma.user.findUnique({
       where: { email },
     });
   }
 
-  // Récupérer tous les utilisateurs
   async findAll() {
     return await this.prisma.user.findMany();
   }

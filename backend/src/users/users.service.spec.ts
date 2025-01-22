@@ -8,8 +8,8 @@ describe('UsersService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        UsersService, // Ajoute le UserService
-        PrismaService, // Ajoute PrismaService comme dépendance
+        UsersService,
+        PrismaService,
       ], 
     }).compile();
 

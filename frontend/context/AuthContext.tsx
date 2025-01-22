@@ -30,13 +30,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = () => {
     setIsAuthenticated(true);
-    router.push("/dashboard");
+    router.push("/profile/dashboard");
   };
 
   const logout = () => {
     removeToken();
     setIsAuthenticated(false);
-    router.push("/login");
+    router.push("/");
   };
 
   return (

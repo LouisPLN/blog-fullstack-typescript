@@ -3,10 +3,7 @@ import { useForm } from "react-hook-form";
 import { loginUser } from "../../utils/api";
 import FormInput from "../Input/FormInput";
 import Modal from "../Modal/Modal";
-import { saveToken } from "@/utils/auth";
-import { useRouter } from "next/router";
 import AppButton from "../Button/AppButton";
-import login from "@/pages/auth/login";
 import { useAuth } from "@/context/AuthContext";
 
 type LoginFormInputs = {

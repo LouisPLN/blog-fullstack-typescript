@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace("/dashboard");
+      router.replace("/profile/dashboard");
     }
   }, [isAuthenticated, router]);
 
