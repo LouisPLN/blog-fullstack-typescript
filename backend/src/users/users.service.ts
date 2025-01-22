@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
 
@@ -20,7 +20,7 @@ export class UsersService {
       where: { id },
     });
     if (!user) {
-      throw new Error(`User with ID ${id} does not exist`);
+      throw new NotFoundException(`User with ID ${id} does not exist`);
     }
     return await this.prisma.user.delete({
       where: { id },
@@ -32,9 +32,9 @@ export class UsersService {
       where: { id },
     });
     if (!user) {
-      throw new Error(`User with ID ${id} does not exist`);
+      throw new NotFoundException(`User with ID ${id} does not exist`);
     }
-  
+
     const updateData: any = {};
     if (data.email) {
       updateData.email = data.email;
@@ -42,7 +42,7 @@ export class UsersService {
     if (data.password) {
       updateData.password = await bcrypt.hash(data.password, 10);
     }
-  
+
     return await this.prisma.user.update({
       where: { id },
       data: updateData,
@@ -50,6 +50,10 @@ export class UsersService {
   }
 
   async findById(id: number) {
+    if (!id) {
+      throw new NotFoundException(`User with ID ${id} does not exist`);
+    }
+
     return await this.prisma.user.findUnique({
       where: { id },
     });
@@ -62,6 +66,8 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.prisma.user.findMany();
+    return await this.prisma.user.findMany({
+      select: { id: true, email: true, createdAt: true },
+    });
   }
 }

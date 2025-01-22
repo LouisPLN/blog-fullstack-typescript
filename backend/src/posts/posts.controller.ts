@@ -1,25 +1,36 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post as PostRequest, Body, Param, Delete, Put } from '@nestjs/common';
 import { PostsService } from './posts.service';
+import { Post } from '@prisma/client';
 
-@Controller('posts')
+@Controller('articles')
 export class PostsController {
-  constructor(private readonly postsService: PostsService) {}
+  constructor(private readonly postService: PostsService) {}
 
-  // Créer un post
-  @Post()
-  async createPost(@Body() data: { title: string; content: string; authorId: number; categories?: number[]; tags?: number[] }) {
-    return this.postsService.create(data);
-  }
-
-  // Récupérer un post par ID
-  @Get(':id')
-  async getPostById(@Param('id') id: number) {
-    return this.postsService.findById(id);
-  }
-
-  // Lister tous les posts
   @Get()
-  async getAllPosts() {
-    return this.postsService.findAll();
+  async findAll(): Promise<Post[]> {
+    return this.postService.findAll();
+  }
+
+  @PostRequest()
+  async create(@Body() data: { title: string; content: string; image: string; tags: string[]; categories: string[]; authorId: number }): Promise<Post> {
+    return this.postService.create(data);
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: number): Promise<Post> {
+    return this.postService.findById(id);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: number,
+    @Body() data: { title?: string; content?: string; image?: string; tags?: string[]; categories?: string[] },
+  ): Promise<Post> {
+    return this.postService.update(id, data);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: number): Promise<Post> {
+    return this.postService.delete(id);
   }
 }
