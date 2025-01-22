@@ -17,8 +17,8 @@ export class AuthController {
   ) {}
 
   @Post('register')
-  async register(@Body() body: { email: string; password: string }) {
-    const { email, password } = body;
+  async register(@Body() body: { email: string; username: string; password: string }) {
+    const { email, username, password } = body;
 
     const existingUser = await this.usersService.findByEmail(email);
     if (existingUser) {
@@ -29,6 +29,7 @@ export class AuthController {
 
     const user = await this.usersService.create({
       email,
+      username,
       password: hashedPassword,
     });
 
@@ -36,7 +37,7 @@ export class AuthController {
 
     return {
       message: 'User registered successfully',
-      user: { id: user.id, email: user.email },
+      user: { id: user.id, email: user.email , username: user.username},
       token,
     };
   }

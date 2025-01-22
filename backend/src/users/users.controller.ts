@@ -28,7 +28,7 @@ export class UsersController {
   @Put(':id')
   async updateUser(
     @Param('id') id: string,
-    @Body() body: { email?: string; password?: string },
+    @Body() body: { email?: string; username?: string; password?: string },
   ) {
     return this.userService.updateUser(Number(id), body);
   }

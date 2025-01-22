@@ -18,7 +18,7 @@ export class PostsController {
 
   @Get(':id')
   async findById(@Param('id') id: number): Promise<Post> {
-    return this.postService.findById(id);
+    return this.postService.findById(Number(id));
   }
 
   @Put(':id')
@@ -26,11 +26,11 @@ export class PostsController {
     @Param('id') id: number,
     @Body() data: { title?: string; content?: string; image?: string; tags?: string[]; categories?: string[] },
   ): Promise<Post> {
-    return this.postService.update(id, data);
+    return this.postService.update(Number(id), data);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<Post> {
-    return this.postService.delete(id);
+    return this.postService.delete(Number(id));
   }
 }
