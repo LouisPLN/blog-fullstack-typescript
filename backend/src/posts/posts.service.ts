@@ -14,6 +14,14 @@ export class PostsService {
     categories: string[] | string;
     authorId: number;
   }): Promise<Post> {
+    const authorExists = await this.prisma.user.findUnique({
+      where: { id: Number(data.authorId) },
+    });
+
+    if (!authorExists) {
+      throw new Error(`User with id ${data.authorId} does not exist.`);
+    }
+
     data.tags =
       typeof data.tags === 'string' ? data.tags.split(',') : data.tags;
     data.categories =
