@@ -1,8 +1,22 @@
-import { Controller, Get, Post as PostRequest, Body, Param, Delete, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post as PostRequest,
+  Body,
+  Param,
+  Delete,
+  Put,
+  BadRequestException,
+  ParseFilePipeBuilder,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { PostsService } from './posts.service';
+import { Express } from 'express';
 import { Post } from '@prisma/client';
 
-@Controller('articles')
+@Controller('posts')
 export class PostsController {
   constructor(private readonly postService: PostsService) {}
 
@@ -12,8 +26,31 @@ export class PostsController {
   }
 
   @PostRequest()
-  async create(@Body() data: { title: string; content: string; image: string; tags: string[]; categories: string[]; authorId: number }): Promise<Post> {
-    return this.postService.create(data);
+  @UseInterceptors(FileInterceptor('image'))
+  async create(
+    @Body()
+    data: {
+      title: string;
+      content: string;
+      tags: string[] | string;
+      categories: string[] | string;
+      authorId: number;
+    },
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({ fileType: /(jpeg|jpg|png)$/ })
+        .build({
+          fileIsRequired: false,
+        }),
+    )
+    image?: Express.Multer.File,
+  ): Promise<Post> {
+    if (image) {
+      const imageUrl = `uploads/${image.filename}`;
+      return this.postService.create({ ...data, image: imageUrl });
+    } else {
+      throw new BadRequestException('Image file is required');
+    }
   }
 
   @Get(':id')
@@ -22,11 +59,29 @@ export class PostsController {
   }
 
   @Put(':id')
+  @UseInterceptors(FileInterceptor('image'))
   async update(
     @Param('id') id: number,
-    @Body() data: { title?: string; content?: string; image?: string; tags?: string[]; categories?: string[] },
+    @Body()
+    data: {
+      title?: string;
+      content?: string;
+      image?: string;
+      tags?: string[] | string;
+      categories?: string[] | string;
+      authorId: number;
+    },
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({ fileType: /(jpeg|jpg|png)$/ })
+        .build({
+          fileIsRequired: false,
+        }),
+    )
+    image?: Express.Multer.File,
   ): Promise<Post> {
-    return this.postService.update(Number(id), data);
+    const imageUrl = image ? `uploads/${image.filename}` : undefined;
+    return this.postService.update(Number(id), { ...data, image: imageUrl });
   }
 
   @Delete(':id')

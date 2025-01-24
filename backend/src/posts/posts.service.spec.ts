@@ -16,7 +16,6 @@ describe('PostsService', () => {
     service = module.get<PostsService>(PostsService);
   });
 
-  // Test de base : vérifie que le service est défini
   it('should be defined', () => {
     expect(service).toBeDefined();
   });

@@ -11,18 +11,18 @@ export class ProjectsService {
     image: string;
     userId: number;
   }) {
-    return await this.prisma.project.create({
+    return this.prisma.project.create({
       data: {
         name: data.name,
         description: data.description,
+        userId: Number(data.userId),
         image: data.image,
-        userId: data.userId,
       },
     });
   }
 
   async findAll() {
-    return await this.prisma.project.findMany({
+    return this.prisma.project.findMany({
       include: {
         user: {
           select: {
@@ -56,44 +56,37 @@ export class ProjectsService {
 
   async update(
     id: number,
-    data: { name?: string; description?: string; image?: string },
+    data: {
+      name?: string;
+      description?: string;
+      image?: string;
+      userId: number;
+    },
   ) {
-    const project = await this.prisma.project.findUnique({
-      where: { id },
-    });
+    const project = await this.prisma.project.findUnique({ where: { id } });
 
     if (!project) {
       throw new NotFoundException(`Project with ID ${id} not found`);
     }
 
-    const updateData: any = {};
-    if (data.name) {
-      updateData.name = data.name;
-    }
-    if (data.description) {
-      updateData.description = data.description;
-    }
-    if (data.image) {
-      updateData.image = data.image;
-    }
-
-    return await this.prisma.project.update({
+    return this.prisma.project.update({
       where: { id },
-      data: updateData,
+      data: {
+        name: data.name,
+        description: data.description,
+        userId: Number(data.userId),
+        image: data.image,
+      },
     });
   }
 
   async delete(id: number) {
-    const project = await this.prisma.project.findUnique({
-      where: { id },
-    });
+    const project = await this.prisma.project.findUnique({ where: { id } });
 
     if (!project) {
       throw new NotFoundException(`Project with ID ${id} not found`);
     }
 
-    return await this.prisma.project.delete({
-      where: { id },
-    });
+    return this.prisma.project.delete({ where: { id } });
   }
 }

@@ -30,5 +30,6 @@ frontend/out
 
 # Backend build
 backend/dist
+backend/uploads
 
 notes.txt
