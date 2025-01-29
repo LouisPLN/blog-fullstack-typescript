@@ -1,8 +1,10 @@
+import AppButton from "@/components/Button/AppButton";
+import ToggleFormsButton from "@/components/Button/ToggleFormsButton";
 import withAuth from "@/utils/withAuth";
 
 const dashboard = () => {
   return (
-    <div>dashboard</div>
+    <div><ToggleFormsButton optionLeft="Formulaire Projet" optionRight="Formulaire Post"></ToggleFormsButton></div>
   )
 }
 
